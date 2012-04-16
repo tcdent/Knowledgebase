@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+
+{% block head %}
+<link rel="stylesheet" href="{{ STATIC_URL }}stylesheets/search.css" type="text/css" charset="utf-8">
+{% endblock %}
+
+{% block content_top %}
+	<h1>Search</h1>
+
+	<form method="get" action="." id="search-page-form">
+		{% for hidden in form.hidden_fields %}{{ hidden }}{% endfor %}
+		
+		{{ form.non_field_errors }}
+		{{ formsets.ingredients.non_field_errors }}
+		
+		<div>
+			{{ form.q }}
+			<a href="#" onclick="$('search-page-form').submit();" class="button">Search</a>
+			{{ form.q.errors }}
+		</div>
+		<div class="models">
+			{{ form.models }}
+			{{ form.models.errors }}
+		</div>
+	</form>
+	
+	{% if query %}
+		<h3>Results</h3>
+		
+		{% for result in page.object_list %}
+			{% if result.verbose_name %}
+			<p><a href="{{ result.object.get_absolute_url }}">{{ result.verbose_name }}: <strong>{{ result.object }}</strong></a></p>
+			{% endif %}
+		{% empty %}
+			<p>No results found.</p>
+		{% endfor %}
+		
+		{% if page.has_previous or page.has_next %}
+			<div>
+				{% if page.has_previous %}<a href="?q={{ query }}&amp;page={{ page.previous_page_number }}">{% endif %}&laquo; Previous{% if page.has_previous %}</a>{% endif %}
+				| {% if page.has_next %}<a href="?q={{ query }}&amp;page={{ page.next_page_number }}">{% endif %}Next &raquo;{% if page.has_next %}</a>{% endif %}
+			</div>
+		{% endif %}
+	{% endif %}
+{% endblock %}

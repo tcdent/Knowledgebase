@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+
+{% block header %}
+<div class="breadcrumb">Knowledgebase <a href="{% url pages:create %}" style="float:right">New</a></div>
+{% endblock %}
+
+{% block content %}
+<ul class="outline">
+	{% for page in pages %}
+	{% include "pages/partials/listing.html" with page=page %}
+	{% endfor %}
+</ul>
+{% endblock %}

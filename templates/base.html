@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>{{ SITE_NAME }}{% block title %}{% endblock %}</title>
+
+    <link rel="stylesheet" href="{{ STATIC_URL }}stylesheets/global.css" type="text/css" charset="utf-8">
+    
+    <script src="{{ STATIC_URL }}scripts/prototype.js" type="text/javascript" charset="utf-8"></script>
+    <script src="{{ STATIC_URL }}scripts/scriptaculous.js?load=effects,dragdrop" type="text/javascript" charset="utf-8"></script>
+    <script src="{{ STATIC_URL }}scripts/global.js" type="text/javascript" charset="utf-8"></script>
+    
+    {% block head %}{% endblock %}
+</head>
+
+<body id="{{ app_name|lower }}">
+    <div id="container">
+        <div id="header">
+            {% block header %}{% endblock %}
+            
+            {% if messages %}
+            <ul class="messages">
+                {% for message in messages %}
+                <li class="grabby {% if message.tags %} {{ message.tags }}{% endif %}">{{ message }}</li>
+                {% endfor %}
+            </ul>
+            <script type="text/javascript" charset="utf-8">
+                setTimeout(function(){
+                    $$('ul.messages').first().blindUp({ duration: 0.5 });
+                }, 5000);
+            </script>
+            {% endif %}
+        </div>
+        <div id="content">
+            {% block content %}{% endblock %}
+        </div>
+    </div>
+</body>
+</html>

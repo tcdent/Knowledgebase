@@ -1,0 +1,13 @@
+{% load cache %}
+<li>
+    {% cache 500 url page.pk %}<a href="{{ page.get_absolute_url }}">{{ page }}</a>{% endcache %}
+    {% if page.children %}
+        <ul>{% spaceless %}
+        {% for child in page.children %}
+        {% with "pages/partials/listing.html" as template_name %}
+        {% include template_name with page=child %}
+        {% endwith %}
+        {% endfor %}
+        {% endspaceless %}</ul>
+    {% endif %}
+</li>

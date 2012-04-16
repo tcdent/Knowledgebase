@@ -1,0 +1,50 @@
+{% extends "base.html" %}
+{% load markup %}
+
+{% block title %} - {{ page }}{% endblock %}
+
+{% block header %}
+<div class="breadcrumb">
+    <a href="{% url pages:home %}">Knowledgebase</a> &raquo;
+    {% for parent in page.parents %}
+    <a href="{{ parent.get_absolute_url }}">{{ parent }}</a> &raquo; 
+    {% endfor %}
+    {{ page }}
+    
+    <a href="{% url pages:create %}?parent_id={{ page.id }}" style="float:right">New</a>
+</div>
+{% endblock %}
+
+{% block content %}
+{% block page_content %}
+<h1>{{ page }} <a href="{{ page.get_absolute_url }}edit/" class="edit">Edit</a></h1>
+{% autoescape off %}{{ page.rendered_content }}{% endautoescape %}
+{% endblock %}
+
+{% if page.children %}
+<div class="continuation">
+    <ul>
+    {% for child in page.children %}
+    {% include "pages/partials/listing.html" with page=child %}
+    {% endfor %}
+    </ul>
+</div>
+{% endif %}
+
+{% if page.revisions %}
+<div class="changelog">
+    <a href="#" onclick="$$('.changelog ul').first().show(); this.hide(); return false;">Show History ({{ page.revisions|length }})</a>
+    <ul style="display:none">{% spaceless %}
+    {% for revision in page.revisions %}
+        {% if forloop.first %}
+        <li><a href="{{ page.get_absolute_url }}"><em>Current Version</em></a></li>
+        {% else %}
+        <li><a href="{{ page.get_absolute_url }}diff/{{ revision.pk }}/">
+            {{ revision.revision.date_created }} - <em>{% if revision.type == 0 %}Added{% else %}Edited{% endif %}</em></a></li>
+        {% endif %}
+        
+    {% endfor %}
+    {% endspaceless %}</ul>
+</div>
+{% endif %}
+{% endblock %}

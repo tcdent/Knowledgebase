@@ -1,0 +1,190 @@
+
+body {
+    margin: 0;
+    font-family: Georgia, Times, serif;
+    font-size: 14px;
+    line-height: 17px;
+    color: #222;
+}
+
+h1 {
+    margin: 24px 0 12px 0;
+}
+
+h2 {
+    margin: 16px 0 8px 0;
+}
+
+a {
+    color: #222;
+}
+
+p {
+    margin: 0 0 8px 0;
+    padding: 0;
+}
+
+sub, sup {
+    font-size: 70%;
+    line-height: 0;
+    position: relative;
+    vertical-align: baseline;
+}
+
+h1 sub, 
+h1 sup {
+    font-size: 50%;
+}
+
+sup {
+    top: -0.5em;
+}
+
+sub {
+    bottom: -0.25em;
+}
+
+ul {
+    margin: 0;
+    padding: 2px 0 2px 20px;
+}
+
+li {
+    margin: 0;
+    padding: 2px 0;
+    list-style-type: square;
+}
+
+table {
+    border-collapse: collapse;
+}
+
+th, td {
+    padding: 3px 8px;
+    border: 1px solid #666;
+}
+
+th {
+    border: none;
+}
+
+.monospace {
+    font-family: "Monaco", monospace;
+}
+
+.good {
+    font-weight: bold;
+    color: green;
+}
+
+.bad {
+    font-weight: bold;
+    color: green;
+}
+
+.grabby {
+    padding: 5px 10px;
+    background: url('../images/stripes.png');
+    border-bottom: 1px solid #555;
+    font-style: italic;
+    -webkit-text-stroke: 4px white;
+    position: relative;
+    color: black;
+}
+
+.grabby > span {
+    top: 0;
+    left: 0;
+    padding: 5px 10px;
+    display: block;
+    position: absolute;
+    -webkit-text-stroke: 0;
+}
+
+form label {
+    width: 100px;
+    display: block;
+    float: left;
+}
+
+form > p {
+    width: 600px;
+    float: left;
+}
+
+form input[type=text] {
+    font-size: 15px;
+    width: 490px;
+}
+
+form textarea {
+    width: 490px;
+    height: 600px;
+    font-family: "Monaco", monospace;
+}
+
+#container {
+    width: 800px;
+    margin: 0 auto;
+}
+
+#header {
+    margin-bottom: 25px;
+}
+
+h1 > .edit {
+    float: right;
+    font-size: 13px;
+    font-weight: normal;
+}
+
+.messages {
+    margin: 0;
+    padding: 0;
+}
+
+.messages li {
+    margin: 0;
+    list-style-type: none;
+    display: block;
+}
+
+.breadcrumb {
+    margin: 0;
+    padding: 6px 10px;
+    background: #222;
+    color: white;
+}
+
+.breadcrumb a {
+    color: white;
+}
+
+.outline > li {
+    font-size: 14px;
+    font-weight: bold;
+}
+
+.continuation, 
+.changelog {
+    margin-top: 10px;
+    padding-top: 10px;
+    border-top: 1px solid #666;
+}
+
+.formatting-help {
+    width: 190px;
+    padding: 0 0 0 10px;
+    overflow: hidden;
+    float: left;
+}
+
+.formatting-help, 
+.formatting-help pre {
+    font-size: 11px;
+    line-height: 12px;
+}
+
+.formatting-help h3 {
+    margin-bottom: 4px;
+}

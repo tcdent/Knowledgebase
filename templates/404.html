@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+
+{% block content_top %}
+	<div class="col full">
+		<h1>Page Not Found</h1>
+		<p>We're sorry, but the page you were looking for does not exist.</p>
+		<p>Please try navigating from the site <a href="{% url pages:home %}">homepage</a>, or one of these suggested sections to find what you were looking for.</p>
+		
+		{% load cache %}
+		{% cache 500 suggested_reading %}
+		<div>
+			<ul>
+				<li><a href="{% url products:index %}"><strong>Products</strong></a></li>
+				{% for category in product_categories %}
+				<li style="margin-left:10px;"><a href="{% url products:category category.slug %}">{{ category }}</a></li>
+				{% endfor %}
+				<li><a href="{% url locator:index %}"><strong>Store Locator</strong></a></li>
+				<li><a href="{% url blog:index %}"><strong>Blog + News</strong></a></li>
+				<li><a href="{% url faq:index %}"><strong>FAQs</strong></a></li>
+				<li><a href="{% url pages:generic 'market-cafe' %}"><strong>Market &amp; Caf&eacute;</strong></a></li>
+				<li><a href="{% url pages:generic 'about' %}"><strong>About Us</strong></a></li>
+			</ul>
+		</div>
+		{% endcache %}
+	</div>
+{% endblock %}

@@ -1,0 +1,60 @@
+{% extends "base.html" %}
+
+{% block header %}
+<div class="breadcrumb"><a href="{% url pages:home %}">Knowledgebase</a> &raquo; Create</div>
+{% endblock %}
+
+{% block content %}
+<form action="." method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    
+	<div class="formatting-help">
+		<h3>Emphasis</h3>
+		<pre>*italic*  **bold**</pre>
+
+		<h3>Links</h3>
+		<pre>A [link](http://url.com)</pre>
+
+{% if object.supports_attachments %}
+		<h3>Images</h3>
+		<p>Caption text is optional. Size can be 'small', 'medium', 'large' or 'original'.</p>
+		<pre>![Caption Text][attachment_name size]</pre>
+{% endif %}
+
+		<h3>Headers</h3>
+		<pre>Header 1
+========
+
+Header 2
+--------</pre>
+
+		<h3>Lists</h3>
+		<p>Ordered:</p>
+		<pre>1.  Foo
+2.  Bar</pre>
+
+		<p>Unordered:</p>
+		<pre>*  A list item.
+*  Bar.</pre>
+
+		<h3>Blockquotes</h3>
+
+		<pre>&gt; Email-style angle brackets
+&gt; are used for blockquotes.
+
+&gt; &gt; And, they can be nested.</pre>
+
+		<h3>Manual Line Breaks</h3>
+
+		<p>End a line with two or more spaces:</p>
+
+		<pre>Roses are red,	  
+Violets are blue.</pre>
+		<p><a href="http://daringfireball.net/projects/markdown/syntax" target="_blank">Complete Documentation &raquo;</a></p>
+	</div>
+    
+    <p><input type="submit" value="Save" style="margin-left:100px"></p>
+</form>
+
+{% endblock %}

@@ -1,0 +1,14 @@
+{% extends "pages/base.html" %}
+
+{% block header %}
+{{ block.super }}
+<div class="grabby">
+    <em>Showing revision history from {{ revision.revision.date_created }} to Today.</em>
+    &nbsp;<a href="{{ page.get_absolute_url }}">Show Current Version</a>
+</div>
+{% endblock %}
+
+{% block page_content %}
+<h1>{% autoescape off %}{{ title }}{% endautoescape %}</h1>
+{% autoescape off %}<div class="monospace">{{ content }}</div>{% endautoescape %}
+{% endblock %}
