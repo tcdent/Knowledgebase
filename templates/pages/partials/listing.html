@@ -1,13 +1,23 @@
 {% load cache %}
 <li>
+    {% spaceless %}
     {% cache 500 url page.pk %}<a href="{{ page.get_absolute_url }}">{{ page }}</a>{% endcache %}
-    {% if page.children %}
-        <ul>{% spaceless %}
+    {% if not page.content %}<span class="oslash">&oslash;</span>{% endif %}
+    {% if "?" in page.rendered_content|striptags %}<span class="unresolved">?</span>{% endif %}
+    {% if page.children and levels|default:"False" > 1 %}
+        <ul>
         {% for child in page.children %}
         {% with "pages/partials/listing.html" as template_name %}
-        {% include template_name with page=child %}
+        {% ifequal levels "False" %}
+            {% include template_name with page=child %}
+        {% else %}
+            {% include template_name with page=child levels=levels|add:"-1" %}
+        {% endifequal %}
         {% endwith %}
         {% endfor %}
-        {% endspaceless %}</ul>
+        </ul>
+    {% else %}
+    {% if page.children %}<span>...</span>{% endif %}
     {% endif %}
+    {% endspaceless %}
 </li>

@@ -1,0 +1,58 @@
+{% load thumbnail %}
+{% if object.supports_attachments %}
+<div class="module attachable_images">
+    <style type="text/css" media="screen">
+        .images span {
+            font-family: monospace;
+        }
+    </style>
+    
+    <script type="text/javascript" charset="utf-8">
+        document.observe('dom:loaded', function(){
+            $('attachable_images_module_iframe').observe('load', function(e){
+                // Insert image into list of attached images.
+                var data = e.element().contentWindow.document.body.innerHTML.evalJSON();
+                if(!data.error){
+                    $('attachable_images_module_images').insert(
+                        new Element('li').insertCollection([
+                            new Element('img', { src: data.thumbnail }), 
+                            new Element('span').update(data.name)
+                        ]));
+                } else {
+                    $H(data.errors).each(function(error){
+                        $('attachable_images_module_form').insert(
+                            new Element('p', {'class':'error'}).update(error.value.join(', ')));
+                    });
+                }
+            });
+        });
+    </script>
+    
+    <div class="header"><h1>Attached Images</h1></div>
+    <div class="content">
+        <ul class="images" id="attachable_images_module_images">
+            {% for attachment in object.attached_images.all %}
+            <li>
+                {% thumbnail attachment.file "50x50" crop='center' as image %}
+                    <img src="{{ image.url }}">
+                {% endthumbnail %}
+                <span>{{ attachment.name }}</span>
+            </li>
+            {% endfor %}
+        </ul>
+        <a href="#" onclick="$('attachable_images_module_upload').show(); $(this).hide();">Add New Image</a>
+        <div id="attachable_images_module_upload" class="upload" style="display:none">
+            <hr>
+            <iframe src="" id="attachable_images_module_iframe" name="attachable_images_module_iframe" style="display:none"></iframe>
+            <form id="attachable_images_module_form" action="{% url media:attach_image %}" target="attachable_images_module_iframe" method="post" accept-charset="utf-8" enctype="multipart/form-data">
+                {% csrf_token %}
+                <div style="display:none"><input type="hidden" name="content_type" value="{{ object.content_type.id }}"></div>
+                <div style="display:none"><input type="hidden" name="object_id" value="{{ object.id }}"></div>
+                <p><input type="text" name="name" value="New image name" onfocus="if(this.value == 'New image name') this.value = '';"></p>
+                <p><input type="file" name="file"></p>
+                <p><input type="submit" value="Attach"></p>
+            </form>
+        </div>
+    </div>
+</div>
+{% endif %}

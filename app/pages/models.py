@@ -9,7 +9,7 @@ from media.models import AttachableModel
 class Page(AttachableModel):
     parent = models.ForeignKey('self', blank=True, null=True)
     title = models.CharField('Title', max_length=200)
-    content = models.TextField('Content')
+    content = models.TextField('Content', blank=True, null=True)
     created = models.DateTimeField('Creation Date', auto_now_add=True)
     updated = models.DateTimeField('Update Date', auto_now=True)
     

@@ -12,6 +12,7 @@ urlpatterns = patterns('',
     (r'^admin/', include(admin.site.urls)),
     (r'^search/', include('app.search.urls')), 
     
+    url(r'^', include('app.media.urls', namespace='media')), 
     url(r'^', include('app.pages.urls', namespace='pages')), 
     
     # Uncomment the admin/doc line below to enable admin documentation:

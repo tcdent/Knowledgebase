@@ -1,6 +1,7 @@
 from string import capwords
 from django.views.generic import View, TemplateView, DetailView, ListView, CreateView, UpdateView, DeleteView
 from django.views.generic.edit import ModelFormMixin
+from django.db.models import Q
 from django.http import Http404
 from django.contrib import messages
 from reversion.helpers import generate_patch_html
@@ -33,16 +34,29 @@ class PageFormMixin(ModelFormMixin):
 class ExistingObjectView(View):
     def get_object(self, queryset=None):
         try:
+            slugs = self.kwargs['slug'].replace('_', ' ').split('/')
+            
+            # Something about chaining the __isnull filter is not responding as 
+            # expected. This works:
+            if len(slugs) == 1: # Page is at the root.
+                queryset = Page.objects.filter(title=slugs.pop(), parent__isnull=True)
+            else:
+                queryset = Page.objects.filter(title=slugs.pop())
+            
+            # But this more desirable format, does not:
+            # queryset = Page.objects.filter(title=slugs.pop())
+            # if not len(slugs):
+            #     queryset.filter(parent__isnull=True)
+            
             # Separate out URL sections and pop the furthest token. 
             # Repeat until we have a unique matching entry.
             cycle = 1
-            slugs = self.kwargs['slug'].replace('_', ' ').split('/')
-            queryset = Page.objects.filter(title=slugs.pop())
-            while len(queryset) > 1:
+            while len(queryset) > 1 and len(slugs):
                 conditions = {}
                 conditions["%stitle" % ("parent__" * cycle)] = slugs.pop()
                 queryset = queryset.filter(**conditions)
                 cycle += 1
+            
             return queryset[0]
         except Exception:
             raise Http404()

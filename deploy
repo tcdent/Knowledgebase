@@ -1,0 +1,10 @@
+#/bin/bash
+
+cd /var/www/knowledgebase/ && \
+sudo cp -n knowledgebase.db /mnt/Tripe/Backups/knowledgebase/knowledgebase-$(date +"%Y-%m-%d").db && \
+sudo rsync -av --exclude ":2e* .git* *.db *.pyc" /mnt/Tripe/Personal/Knowledgebase/Build/ . && \
+sudo chown -R www-data:www-data . && \
+sudo environment/bin/python app/manage.py syncdb && \
+sudo environment/bin/python app/manage.py migrate && \
+sudo service apache2 reload && \
+exit

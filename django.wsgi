@@ -2,9 +2,9 @@ import os
 import sys
 import site
 
-site.addsitedir('/mnt/Tripe/Personal/Knowledgebase/Build/environment/lib/python2.6/site-packages')
-sys.path.append('/mnt/Tripe/Personal/Knowledgebase/Build/')
-sys.path.append('/mnt/Tripe/Personal/Knowledgebase/Build/app/')
+site.addsitedir('/var/www/knowledgebase/environment/lib/python2.6/site-packages')
+sys.path.append('/var/www/knowledgebase/')
+sys.path.append('/var/www/knowledgebase/app/')
 
 os.environ['DJANGO_SETTINGS_MODULE'] = 'app.settings'
 

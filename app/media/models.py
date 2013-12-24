@@ -10,8 +10,8 @@ from common.thumbnail.fields import ThumbnailField
 IMAGE_FORMATS = {
     'thumbnail': "50x50", 
     'small': "240x180", 
-    'medium': "400x250", 
-    'large': "615x350"
+    'medium': "490x320", 
+    'large': "800x460"
 }
 
 class AttachableImage(models.Model):

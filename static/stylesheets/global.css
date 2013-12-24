@@ -52,6 +52,9 @@ ul {
 li {
     margin: 0;
     padding: 2px 0;
+}
+
+ul li {
     list-style-type: square;
 }
 
@@ -80,6 +83,16 @@ th {
 .bad {
     font-weight: bold;
     color: green;
+}
+
+.oslash, 
+.unresolved {
+    color: #555;
+    font-weight: normal;
+}
+
+.unresolved {
+    font-size: 11px;
 }
 
 .grabby {
@@ -161,8 +174,17 @@ h1 > .edit {
 }
 
 .outline > li {
-    font-size: 14px;
+    font-size: 15px;
     font-weight: bold;
+}
+
+.outline > li ul li {
+    font-weight: normal;
+    font-size: 13px;
+}
+
+li span {
+    padding-left: 2px;
 }
 
 .continuation, 

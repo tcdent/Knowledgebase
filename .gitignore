@@ -1,6 +1,1 @@
-._*
-.DS_Store
-*.pyc
-*.db
-environment
-static/uploads/*
+:2egitignore

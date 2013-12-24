@@ -7,7 +7,7 @@
 {% block content %}
 <ul class="outline">
 	{% for page in pages %}
-	{% include "pages/partials/listing.html" with page=page %}
+	{% include "pages/partials/listing.html" with page=page levels=3 %}
 	{% endfor %}
 </ul>
 {% endblock %}
