@@ -1,12 +1,29 @@
-import os
-import sys
-import site
+"""
+WSGI config for staging and production.
 
-site.addsitedir('/home/knowledgebase/environment/lib/python2.6/site-packages')
-sys.path.append('/home/knowledgebase/')
-sys.path.append('/home/knowledgebase/app/')
+This module contains the WSGI application used by Django's development server
+and any production WSGI deployments. It should expose a module-level variable
+named ``application``. Django's ``runserver`` and ``runfcgi`` commands discover
+this application via the ``WSGI_APPLICATION`` setting.
 
-os.environ['DJANGO_SETTINGS_MODULE'] = 'app.settings'
+Usually you will have the standard Django WSGI application here, but it also
+might make sense to replace the whole Django WSGI application with a custom one
+that later delegates to the Django one. For example, you could introduce WSGI
+middleware here, or combine a Django application with an application of another
+framework.
 
-import django.core.handlers.wsgi
-application = django.core.handlers.wsgi.WSGIHandler()
+"""
+import os, sys, site
+
+os.environ.setdefault("DJANGO_SETTINGS_MODULE", "app.settings")
+site.addsitedir("/home/knowledgebase/.virtualenvs/radbow/lib/python2.7/site-packages")
+sys.path.append("/home/knowledgebase/www")
+sys.path.append("/home/knowledgebase/www/app")
+
+# This application object is used by any WSGI server configured to use this
+# file. This includes Django's development server, if the WSGI_APPLICATION
+# setting points here.
+from django.core.wsgi import get_wsgi_application
+application = get_wsgi_application()
+
+
