@@ -1,0 +1,13 @@
+Django==1.4
+Markdown==2.1.1
+South==0.7.4
+Whoosh==2.3.2
+argparse==1.2.1
+diff-match-patch==20120106
+django-activity-stream==0.4.1
+django-haystack==1.2.7
+django-reversion==1.6.0
+haystack==0.15
+python-ptrace==0.6.4
+sorl-thumbnail==11.12
+wsgiref==0.1.2
