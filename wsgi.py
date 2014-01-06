@@ -16,7 +16,7 @@ framework.
 import os, sys, site
 
 os.environ.setdefault("DJANGO_SETTINGS_MODULE", "app.settings")
-site.addsitedir("/home/knowledgebase/.virtualenvs/radbow/lib/python2.7/site-packages")
+site.addsitedir("/home/knowledgebase/.virtualenvs/knowledgebase/lib/python2.7/site-packages")
 sys.path.append("/home/knowledgebase/www")
 sys.path.append("/home/knowledgebase/www/app")
 
