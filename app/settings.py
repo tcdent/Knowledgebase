@@ -155,7 +155,7 @@ INSTALLED_APPS = (
     'sorl.thumbnail', 
     #'actstream', 
     'south', 
-    'haystack', 
+    #'haystack', 
     'reversion', 
     
     'app.common', 
